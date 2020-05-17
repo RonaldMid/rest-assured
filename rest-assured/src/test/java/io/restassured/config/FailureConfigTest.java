@@ -53,7 +53,8 @@ public class FailureConfigTest {
                 .headerConfig(new HeaderConfig())
                 .multiPartConfig(new MultiPartConfig())
                 .paramConfig(new ParamConfig())
-                .oauthConfig(new OAuthConfig());
+                .oauthConfig(new OAuthConfig())
+                .csrfCookieToHeaderConfig(new CSRFCookieToHeaderConfig());
         // Then
         assertThat(config.getFailureConfig().getFailureListeners(), hasSize(2));
     }

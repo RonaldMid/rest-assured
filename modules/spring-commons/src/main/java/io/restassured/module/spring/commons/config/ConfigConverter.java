@@ -27,7 +27,7 @@ public class ConfigConverter {
         return new RestAssuredConfig().jsonConfig(specificationConfig.getJsonConfig()).xmlConfig(specificationConfig.getXmlConfig()).sessionConfig(specificationConfig.getSessionConfig()).
                 objectMapperConfig(specificationConfig.getObjectMapperConfig()).logConfig(specificationConfig.getLogConfig()).encoderConfig(specificationConfig.getEncoderConfig()).
                 decoderConfig(specificationConfig.getDecoderConfig()).multiPartConfig(specificationConfig.getMultiPartConfig()).paramConfig(toParamConfig(specificationConfig.getParamConfig())).
-                matcherConfig(specificationConfig.getMatcherConfig());
+                matcherConfig(specificationConfig.getMatcherConfig()).csrfCookieToHeaderConfig(specificationConfig.getCSRFCookieToHeaderConfig());
     }
 
     private static ParamConfig toParamConfig(ParamConfig baseConfig) {

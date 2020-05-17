@@ -48,6 +48,7 @@ public class RestAssuredWebTestClientConfig implements SpecificationConfig {
 	private final MultiPartConfig multiPartConfig;
 	private final WebTestClientParamConfig paramConfig;
 	private final MatcherConfig matcherConfig;
+	private final CSRFCookieToHeaderConfig csrfCookieToHeaderConfig;
 
 
 	/**
@@ -55,7 +56,7 @@ public class RestAssuredWebTestClientConfig implements SpecificationConfig {
 	 */
 	public RestAssuredWebTestClientConfig() {
 		this(new LogConfig(), new EncoderConfig(), new DecoderConfig(), new SessionConfig(), new ObjectMapperConfig(), new JsonConfig(), new XmlConfig(),
-				new HeaderConfig(), new AsyncConfig(), new MultiPartConfig(), new WebTestClientConfig(), new WebTestClientParamConfig(), new MatcherConfig());
+				new HeaderConfig(), new AsyncConfig(), new MultiPartConfig(), new WebTestClientConfig(), new WebTestClientParamConfig(), new MatcherConfig(), new CSRFCookieToHeaderConfig());
 	}
 
 	/**
@@ -73,7 +74,8 @@ public class RestAssuredWebTestClientConfig implements SpecificationConfig {
 	                                       MultiPartConfig multiPartConfig,
 	                                       WebTestClientConfig webTestClientConfig,
 	                                       WebTestClientParamConfig paramConfig,
-										   MatcherConfig matcherConfig) {
+										   MatcherConfig matcherConfig,
+										   CSRFCookieToHeaderConfig csrfCookieToHeaderConfig) {
 		notNull(logConfig, "Log config");
 		notNull(encoderConfig, "Encoder config");
 		notNull(decoderConfig, "Decoder config");
@@ -86,6 +88,7 @@ public class RestAssuredWebTestClientConfig implements SpecificationConfig {
 		notNull(webTestClientConfig, "webTestClient config");
 		notNull(paramConfig, "Param config");
 		notNull(matcherConfig, "Matcher config");
+		notNull(csrfCookieToHeaderConfig, "CSRF cookie to header config");
 		this.logConfig = logConfig;
 		this.encoderConfig = encoderConfig;
 		this.decoderConfig = decoderConfig;
@@ -99,6 +102,7 @@ public class RestAssuredWebTestClientConfig implements SpecificationConfig {
 		this.webTestClientConfig = webTestClientConfig;
 		this.paramConfig = paramConfig;
 		this.matcherConfig = matcherConfig;
+		this.csrfCookieToHeaderConfig = csrfCookieToHeaderConfig;
 	}
 
 	/**
@@ -149,7 +153,7 @@ public class RestAssuredWebTestClientConfig implements SpecificationConfig {
                 || xmlConfig.isUserConfigured() || jsonConfig.isUserConfigured() || headerConfig.isUserConfigured()
                 || asyncConfig.isUserConfigured() || multiPartConfig.isUserConfigured()
                 || webTestClientConfig.isUserConfigured() || paramConfig.isUserConfigured()
-				|| matcherConfig.isUserConfigured();
+				|| matcherConfig.isUserConfigured() || csrfCookieToHeaderConfig.isUserConfigured();
 	}
 
 	/**
@@ -169,7 +173,7 @@ public class RestAssuredWebTestClientConfig implements SpecificationConfig {
 		notNull(encoderConfig, DecoderConfig.class);
 		return new RestAssuredWebTestClientConfig(logConfig, encoderConfig, decoderConfig, sessionConfig,
                 objectMapperConfig, jsonConfig, xmlConfig, headerConfig, asyncConfig, multiPartConfig,
-                webTestClientConfig, paramConfig, matcherConfig);
+                webTestClientConfig, paramConfig, matcherConfig, csrfCookieToHeaderConfig);
 	}
 
 	/**
@@ -189,7 +193,7 @@ public class RestAssuredWebTestClientConfig implements SpecificationConfig {
 		notNull(encoderConfig, "EncoderConfig");
 		return new RestAssuredWebTestClientConfig(logConfig, encoderConfig, decoderConfig, sessionConfig,
                 objectMapperConfig, jsonConfig, xmlConfig, headerConfig, asyncConfig, multiPartConfig,
-                webTestClientConfig, paramConfig, matcherConfig);
+                webTestClientConfig, paramConfig, matcherConfig, csrfCookieToHeaderConfig);
 	}
 
 	/**
@@ -209,7 +213,7 @@ public class RestAssuredWebTestClientConfig implements SpecificationConfig {
 		notNull(headerConfig, "HeaderConfig");
 		return new RestAssuredWebTestClientConfig(logConfig, encoderConfig, decoderConfig, sessionConfig,
                 objectMapperConfig, jsonConfig, xmlConfig, headerConfig, asyncConfig, multiPartConfig,
-                webTestClientConfig, paramConfig, matcherConfig);
+                webTestClientConfig, paramConfig, matcherConfig, csrfCookieToHeaderConfig);
 	}
 
 	/**
@@ -229,7 +233,7 @@ public class RestAssuredWebTestClientConfig implements SpecificationConfig {
 		notNull(jsonConfig, "JsonConfig");
 		return new RestAssuredWebTestClientConfig(logConfig, encoderConfig, decoderConfig, sessionConfig,
                 objectMapperConfig, jsonConfig, xmlConfig, headerConfig, asyncConfig, multiPartConfig,
-                webTestClientConfig, paramConfig, matcherConfig);
+                webTestClientConfig, paramConfig, matcherConfig, csrfCookieToHeaderConfig);
 	}
 
 	/**
@@ -249,7 +253,7 @@ public class RestAssuredWebTestClientConfig implements SpecificationConfig {
 		notNull(logConfig, "Log config");
         return new RestAssuredWebTestClientConfig(logConfig, encoderConfig, decoderConfig, sessionConfig,
                 objectMapperConfig, jsonConfig, xmlConfig, headerConfig, asyncConfig, multiPartConfig,
-                webTestClientConfig, paramConfig, matcherConfig);
+                webTestClientConfig, paramConfig, matcherConfig, csrfCookieToHeaderConfig);
 	}
 
 	/**
@@ -269,7 +273,7 @@ public class RestAssuredWebTestClientConfig implements SpecificationConfig {
 		notNull(objectMapperConfig, "Object mapper config");
         return new RestAssuredWebTestClientConfig(logConfig, encoderConfig, decoderConfig, sessionConfig,
                 objectMapperConfig, jsonConfig, xmlConfig, headerConfig, asyncConfig, multiPartConfig,
-                webTestClientConfig, paramConfig, matcherConfig);
+                webTestClientConfig, paramConfig, matcherConfig, csrfCookieToHeaderConfig);
 	}
 
 	/**
@@ -289,7 +293,7 @@ public class RestAssuredWebTestClientConfig implements SpecificationConfig {
 		notNull(sessionConfig, "Session config");
         return new RestAssuredWebTestClientConfig(logConfig, encoderConfig, decoderConfig, sessionConfig,
                 objectMapperConfig, jsonConfig, xmlConfig, headerConfig, asyncConfig, multiPartConfig,
-                webTestClientConfig, paramConfig, matcherConfig);
+                webTestClientConfig, paramConfig, matcherConfig, csrfCookieToHeaderConfig);
 	}
 
 	/**
@@ -309,7 +313,7 @@ public class RestAssuredWebTestClientConfig implements SpecificationConfig {
 		notNull(xmlConfig, "XmlConfig");
 		return new RestAssuredWebTestClientConfig(logConfig, encoderConfig, decoderConfig, sessionConfig,
                 objectMapperConfig, jsonConfig, xmlConfig, headerConfig, asyncConfig, multiPartConfig,
-                webTestClientConfig, paramConfig, matcherConfig);
+                webTestClientConfig, paramConfig, matcherConfig, csrfCookieToHeaderConfig);
 	}
 
 	/**
@@ -329,7 +333,7 @@ public class RestAssuredWebTestClientConfig implements SpecificationConfig {
 		notNull(asyncConfig, AsyncConfig.class);
 		return new RestAssuredWebTestClientConfig(logConfig, encoderConfig, decoderConfig, sessionConfig,
                 objectMapperConfig, jsonConfig, xmlConfig, headerConfig, asyncConfig, multiPartConfig,
-                webTestClientConfig, paramConfig, matcherConfig);
+                webTestClientConfig, paramConfig, matcherConfig, csrfCookieToHeaderConfig);
 	}
 
 	/**
@@ -349,7 +353,7 @@ public class RestAssuredWebTestClientConfig implements SpecificationConfig {
 		notNull(multiPartConfig, MultiPartConfig.class);
 		return new RestAssuredWebTestClientConfig(logConfig, encoderConfig, decoderConfig, sessionConfig,
                 objectMapperConfig, jsonConfig, xmlConfig, headerConfig, asyncConfig, multiPartConfig,
-                webTestClientConfig, paramConfig, matcherConfig);
+                webTestClientConfig, paramConfig, matcherConfig, csrfCookieToHeaderConfig);
 	}
 
 	@Override
@@ -375,7 +379,7 @@ public class RestAssuredWebTestClientConfig implements SpecificationConfig {
 		notNull(webTestClientConfig, WebTestClientConfig.class);
 		return new RestAssuredWebTestClientConfig(logConfig, encoderConfig, decoderConfig, sessionConfig,
 				objectMapperConfig, jsonConfig, xmlConfig, headerConfig, asyncConfig, multiPartConfig,
-				webTestClientConfig, paramConfig, matcherConfig);
+				webTestClientConfig, paramConfig, matcherConfig, csrfCookieToHeaderConfig);
 	}
 
 	/**
@@ -407,7 +411,7 @@ public class RestAssuredWebTestClientConfig implements SpecificationConfig {
 		notNull(paramConfig, MultiPartConfig.class);
 		return new RestAssuredWebTestClientConfig(logConfig, encoderConfig, decoderConfig, sessionConfig,
 				objectMapperConfig, jsonConfig, xmlConfig, headerConfig, asyncConfig, multiPartConfig,
-				webTestClientConfig, paramConfig, matcherConfig);
+				webTestClientConfig, paramConfig, matcherConfig, csrfCookieToHeaderConfig);
 	}
 
 	/**
@@ -434,6 +438,27 @@ public class RestAssuredWebTestClientConfig implements SpecificationConfig {
 		notNull(matcherConfig, "Matcher config");
 		return new RestAssuredWebTestClientConfig(logConfig, encoderConfig, decoderConfig, sessionConfig,
 				objectMapperConfig, jsonConfig, xmlConfig, headerConfig, asyncConfig, multiPartConfig,
-				webTestClientConfig, paramConfig, matcherConfig);
+				webTestClientConfig, paramConfig, matcherConfig, csrfCookieToHeaderConfig);
 	}
+
+	/**
+	 * @return The CSRF cookie to header config
+	 */
+	public CSRFCookieToHeaderConfig getCSRFCookieToHeaderConfig() {
+		return csrfCookieToHeaderConfig;
+	}
+
+	/**
+	 * Set the CSRF cookie to header config.
+	 *
+	 * @param csrfCookieToHeaderConfig The {@link CSRFCookieToHeaderConfig} to set
+	 * @return An updated RestAssuredWebTestClientConfig
+	 */
+	public RestAssuredWebTestClientConfig csrfCookieToHeaderConfig(CSRFCookieToHeaderConfig csrfCookieToHeaderConfig) {
+		notNull(csrfCookieToHeaderConfig, "CSRF cookie to header config");
+		return new RestAssuredWebTestClientConfig(logConfig, encoderConfig, decoderConfig, sessionConfig,
+				objectMapperConfig, jsonConfig, xmlConfig, headerConfig, asyncConfig, multiPartConfig,
+				webTestClientConfig, paramConfig, matcherConfig, csrfCookieToHeaderConfig);
+	}
+
 }

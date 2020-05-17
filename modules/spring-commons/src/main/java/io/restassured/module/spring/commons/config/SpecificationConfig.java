@@ -73,4 +73,8 @@ public interface SpecificationConfig {
 
     SpecificationConfig matcherConfig(MatcherConfig matcherConfig);
 
+    CSRFCookieToHeaderConfig getCSRFCookieToHeaderConfig();
+
+    SpecificationConfig csrfCookieToHeaderConfig(CSRFCookieToHeaderConfig csrfCookieToHeaderConfig);
+
 }

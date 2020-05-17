@@ -760,6 +760,30 @@ class ScalatraRestExample extends ScalatraServlet {
   def securityCheck(sessionIdName: String, additionalChecks: () => Boolean) : Any =
     securityCheck(sessionIdName, "j_username", "j_password", additionalChecks)
 
+  get("/csrfCookie") {
+    response.setHeader("Set-Cookie", "XSRF-TOKEN=8adf2ea1-b246-40aa-8e13-a85fb7914341")
+  }
+
+  post("/j_spring_security_check_with_csrf_cookie_and_header") {
+    contentType = "text/plain"
+
+    val cookies: Array[Cookie] = request.getCookies()
+    if (cookies == null) {
+      response.sendError(401, "no cookies provided, expected CSRF cookie XSRF-TOKEN")
+    }
+    val cookie = cookies.find(_.getName.equalsIgnoreCase("XSRF-TOKEN"))
+    if (cookie == None) {
+      response.sendError(401, "CSRF cookie XSRF-TOKEN not provided")
+    }
+    if (request.getHeader("X-XSRF-TOKEN") != cookie.get.getValue) {
+      response.sendError(401, "CSRF header X-XSRF-TOKEN does not match CSRF cookie XSRF-TOKEN")
+    }
+    if (request.getHeader("X-XSRF-TOKEN") != "8adf2ea1-b246-40aa-8e13-a85fb7914341") {
+       response.sendError(401, "CSRF header X-XSRF-TOKEN has incorrect value")
+    }
+    "OK"
+  }
+
   get("/formAuth") {
     formAuth(() => loginPage)
   }

@@ -76,6 +76,9 @@ public class ConfigMergeUtils {
                 base = base.matcherConfig(toMerge.getMatcherConfig());
             }
 
+            if (toMerge.getCSRFCookieToHeaderConfig().isUserConfigured()) {
+                base = base.csrfCookieToHeaderConfig(toMerge.getCSRFCookieToHeaderConfig());
+            }
             return base;
         } else {
             return toMerge;

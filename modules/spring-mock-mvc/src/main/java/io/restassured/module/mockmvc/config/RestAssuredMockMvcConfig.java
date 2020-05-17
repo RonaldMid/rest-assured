@@ -48,13 +48,14 @@ public class RestAssuredMockMvcConfig implements SpecificationConfig {
     private final MultiPartConfig multiPartConfig;
     private final MockMvcParamConfig paramConfig;
     private final MatcherConfig matcherConfig;
+    private final CSRFCookieToHeaderConfig csrfCookieToHeaderConfig;
 
     /**
      * Create a new RestAssuredMockMvcConfig with the default configurations.
      */
     public RestAssuredMockMvcConfig() {
         this(new LogConfig(), new EncoderConfig(), new DecoderConfig(), new SessionConfig(), new ObjectMapperConfig(), new JsonConfig(), new XmlConfig(),
-                new HeaderConfig(), new AsyncConfig(), new MultiPartConfig(), new MockMvcConfig(), new MockMvcParamConfig(), new MatcherConfig());
+                new HeaderConfig(), new AsyncConfig(), new MultiPartConfig(), new MockMvcConfig(), new MockMvcParamConfig(), new MatcherConfig(), new CSRFCookieToHeaderConfig());
     }
 
     /**
@@ -72,7 +73,8 @@ public class RestAssuredMockMvcConfig implements SpecificationConfig {
                                      MultiPartConfig multiPartConfig,
                                      MockMvcConfig mockMvcConfig, 
                                      MockMvcParamConfig paramConfig,
-                                     MatcherConfig matcherConfig) {
+                                     MatcherConfig matcherConfig,
+                                     CSRFCookieToHeaderConfig csrfCookieToHeaderConfig) {
         notNull(logConfig, "Log config");
         notNull(encoderConfig, "Encoder config");
         notNull(decoderConfig, "Decoder config");
@@ -85,6 +87,7 @@ public class RestAssuredMockMvcConfig implements SpecificationConfig {
         notNull(mockMvcConfig, "MockMvc config");
         notNull(paramConfig, "Param config");
         notNull(matcherConfig, "Matcher config");
+        notNull(csrfCookieToHeaderConfig, "CSRF cookie to header config");
         this.logConfig = logConfig;
         this.encoderConfig = encoderConfig;
         this.decoderConfig = decoderConfig;
@@ -98,6 +101,7 @@ public class RestAssuredMockMvcConfig implements SpecificationConfig {
         this.mockMvcConfig = mockMvcConfig;
         this.paramConfig = paramConfig;
         this.matcherConfig = matcherConfig;
+        this.csrfCookieToHeaderConfig = csrfCookieToHeaderConfig;
     }
 
 
@@ -109,7 +113,7 @@ public class RestAssuredMockMvcConfig implements SpecificationConfig {
      */
     public RestAssuredMockMvcConfig logConfig(LogConfig logConfig) {
         notNull(logConfig, "Log config");
-        return new RestAssuredMockMvcConfig(logConfig, encoderConfig, decoderConfig, sessionConfig, objectMapperConfig, jsonConfig, xmlConfig, headerConfig, asyncConfig, multiPartConfig, mockMvcConfig, paramConfig, matcherConfig);
+        return new RestAssuredMockMvcConfig(logConfig, encoderConfig, decoderConfig, sessionConfig, objectMapperConfig, jsonConfig, xmlConfig, headerConfig, asyncConfig, multiPartConfig, mockMvcConfig, paramConfig, matcherConfig, csrfCookieToHeaderConfig);
     }
 
     /**
@@ -120,7 +124,7 @@ public class RestAssuredMockMvcConfig implements SpecificationConfig {
      */
     public RestAssuredMockMvcConfig sessionConfig(SessionConfig sessionConfig) {
         notNull(sessionConfig, "Session config");
-        return new RestAssuredMockMvcConfig(logConfig, encoderConfig, decoderConfig, sessionConfig, objectMapperConfig, jsonConfig, xmlConfig, headerConfig, asyncConfig, multiPartConfig, mockMvcConfig, paramConfig, matcherConfig);
+        return new RestAssuredMockMvcConfig(logConfig, encoderConfig, decoderConfig, sessionConfig, objectMapperConfig, jsonConfig, xmlConfig, headerConfig, asyncConfig, multiPartConfig, mockMvcConfig, paramConfig, matcherConfig, csrfCookieToHeaderConfig);
     }
 
     /**
@@ -131,7 +135,7 @@ public class RestAssuredMockMvcConfig implements SpecificationConfig {
      */
     public RestAssuredMockMvcConfig objectMapperConfig(ObjectMapperConfig objectMapperConfig) {
         notNull(objectMapperConfig, "Object mapper config");
-        return new RestAssuredMockMvcConfig(logConfig, encoderConfig, decoderConfig, sessionConfig, objectMapperConfig, jsonConfig, xmlConfig, headerConfig, asyncConfig, multiPartConfig, mockMvcConfig, paramConfig, matcherConfig);
+        return new RestAssuredMockMvcConfig(logConfig, encoderConfig, decoderConfig, sessionConfig, objectMapperConfig, jsonConfig, xmlConfig, headerConfig, asyncConfig, multiPartConfig, mockMvcConfig, paramConfig, matcherConfig,csrfCookieToHeaderConfig);
     }
 
     /**
@@ -143,7 +147,7 @@ public class RestAssuredMockMvcConfig implements SpecificationConfig {
     public RestAssuredMockMvcConfig jsonConfig(JsonConfig jsonConfig) {
         notNull(jsonConfig, "JsonConfig");
         return new RestAssuredMockMvcConfig(logConfig, encoderConfig, decoderConfig, sessionConfig,
-                objectMapperConfig, jsonConfig, xmlConfig, headerConfig, asyncConfig, multiPartConfig, mockMvcConfig, paramConfig, matcherConfig);
+                objectMapperConfig, jsonConfig, xmlConfig, headerConfig, asyncConfig, multiPartConfig, mockMvcConfig, paramConfig, matcherConfig, csrfCookieToHeaderConfig);
     }
 
     /**
@@ -155,7 +159,7 @@ public class RestAssuredMockMvcConfig implements SpecificationConfig {
     public RestAssuredMockMvcConfig xmlConfig(XmlConfig xmlConfig) {
         notNull(xmlConfig, "XmlConfig");
         return new RestAssuredMockMvcConfig(logConfig, encoderConfig, decoderConfig, sessionConfig,
-                objectMapperConfig, jsonConfig, xmlConfig, headerConfig, asyncConfig, multiPartConfig, mockMvcConfig, paramConfig, matcherConfig);
+                objectMapperConfig, jsonConfig, xmlConfig, headerConfig, asyncConfig, multiPartConfig, mockMvcConfig, paramConfig, matcherConfig, csrfCookieToHeaderConfig);
     }
 
     /**
@@ -167,7 +171,7 @@ public class RestAssuredMockMvcConfig implements SpecificationConfig {
     public RestAssuredMockMvcConfig encoderConfig(EncoderConfig encoderConfig) {
         notNull(encoderConfig, "EncoderConfig");
         return new RestAssuredMockMvcConfig(logConfig, encoderConfig, decoderConfig, sessionConfig,
-                objectMapperConfig, jsonConfig, xmlConfig, headerConfig, asyncConfig, multiPartConfig, mockMvcConfig, paramConfig, matcherConfig);
+                objectMapperConfig, jsonConfig, xmlConfig, headerConfig, asyncConfig, multiPartConfig, mockMvcConfig, paramConfig, matcherConfig, csrfCookieToHeaderConfig);
     }
 
     /**
@@ -179,7 +183,7 @@ public class RestAssuredMockMvcConfig implements SpecificationConfig {
     public RestAssuredMockMvcConfig decoderConfig(DecoderConfig decoderConfig) {
         notNull(encoderConfig, DecoderConfig.class);
         return new RestAssuredMockMvcConfig(logConfig, encoderConfig, decoderConfig, sessionConfig,
-                objectMapperConfig, jsonConfig, xmlConfig, headerConfig, asyncConfig, multiPartConfig, mockMvcConfig, paramConfig, matcherConfig);
+                objectMapperConfig, jsonConfig, xmlConfig, headerConfig, asyncConfig, multiPartConfig, mockMvcConfig, paramConfig, matcherConfig, csrfCookieToHeaderConfig);
     }
 
     /**
@@ -191,7 +195,7 @@ public class RestAssuredMockMvcConfig implements SpecificationConfig {
     public RestAssuredMockMvcConfig headerConfig(HeaderConfig headerConfig) {
         notNull(headerConfig, "HeaderConfig");
         return new RestAssuredMockMvcConfig(logConfig, encoderConfig, decoderConfig, sessionConfig,
-                objectMapperConfig, jsonConfig, xmlConfig, headerConfig, asyncConfig, multiPartConfig, mockMvcConfig, paramConfig, matcherConfig);
+                objectMapperConfig, jsonConfig, xmlConfig, headerConfig, asyncConfig, multiPartConfig, mockMvcConfig, paramConfig, matcherConfig, csrfCookieToHeaderConfig);
     }
 
     /**
@@ -203,7 +207,7 @@ public class RestAssuredMockMvcConfig implements SpecificationConfig {
     public RestAssuredMockMvcConfig asyncConfig(AsyncConfig asyncConfig) {
         notNull(asyncConfig, AsyncConfig.class);
         return new RestAssuredMockMvcConfig(logConfig, encoderConfig, decoderConfig, sessionConfig,
-                objectMapperConfig, jsonConfig, xmlConfig, headerConfig, asyncConfig, multiPartConfig, mockMvcConfig, paramConfig, matcherConfig);
+                objectMapperConfig, jsonConfig, xmlConfig, headerConfig, asyncConfig, multiPartConfig, mockMvcConfig, paramConfig, matcherConfig,csrfCookieToHeaderConfig);
     }
     
     /**
@@ -215,7 +219,7 @@ public class RestAssuredMockMvcConfig implements SpecificationConfig {
     public RestAssuredMockMvcConfig mockMvcConfig(MockMvcConfig mockMvcConfig) {
         notNull(mockMvcConfig, MockMvcConfig.class);
         return new RestAssuredMockMvcConfig(logConfig, encoderConfig, decoderConfig, sessionConfig,
-                objectMapperConfig, jsonConfig, xmlConfig, headerConfig, asyncConfig, multiPartConfig, mockMvcConfig, paramConfig, matcherConfig);
+                objectMapperConfig, jsonConfig, xmlConfig, headerConfig, asyncConfig, multiPartConfig, mockMvcConfig, paramConfig, matcherConfig, csrfCookieToHeaderConfig);
     }
 
     /**
@@ -227,7 +231,7 @@ public class RestAssuredMockMvcConfig implements SpecificationConfig {
     public RestAssuredMockMvcConfig multiPartConfig(MultiPartConfig multiPartConfig) {
         notNull(multiPartConfig, MultiPartConfig.class);
         return new RestAssuredMockMvcConfig(logConfig, encoderConfig, decoderConfig, sessionConfig,
-                objectMapperConfig, jsonConfig, xmlConfig, headerConfig, asyncConfig, multiPartConfig, mockMvcConfig, paramConfig, matcherConfig);
+                objectMapperConfig, jsonConfig, xmlConfig, headerConfig, asyncConfig, multiPartConfig, mockMvcConfig, paramConfig, matcherConfig, csrfCookieToHeaderConfig);
     }
 
     public ClientConfig getClientConfig() {
@@ -250,7 +254,7 @@ public class RestAssuredMockMvcConfig implements SpecificationConfig {
     public RestAssuredMockMvcConfig paramConfig(MockMvcParamConfig paramConfig) {
         notNull(paramConfig, MultiPartConfig.class);
         return new RestAssuredMockMvcConfig(logConfig, encoderConfig, decoderConfig, sessionConfig,
-                objectMapperConfig, jsonConfig, xmlConfig, headerConfig, asyncConfig, multiPartConfig, mockMvcConfig, paramConfig, matcherConfig);
+                objectMapperConfig, jsonConfig, xmlConfig, headerConfig, asyncConfig, multiPartConfig, mockMvcConfig, paramConfig, matcherConfig, csrfCookieToHeaderConfig);
     }
 
     /**
@@ -262,7 +266,19 @@ public class RestAssuredMockMvcConfig implements SpecificationConfig {
     public RestAssuredMockMvcConfig matcherConfig(MatcherConfig matcherConfig) {
         notNull(matcherConfig, MatcherConfig.class);
         return new RestAssuredMockMvcConfig(logConfig, encoderConfig, decoderConfig, sessionConfig,
-                objectMapperConfig, jsonConfig, xmlConfig, headerConfig, asyncConfig, multiPartConfig, mockMvcConfig, paramConfig, matcherConfig);
+                objectMapperConfig, jsonConfig, xmlConfig, headerConfig, asyncConfig, multiPartConfig, mockMvcConfig, paramConfig, matcherConfig, csrfCookieToHeaderConfig);
+    }
+
+    /**
+     * Set the CSRF cookie to header config
+     *
+     * @param csrfCookieToHeaderConfig The {@link CSRFCookieToHeaderConfig} to set
+     * @return An updated RestAssuredMockMvcConfig
+     */
+    public RestAssuredMockMvcConfig csrfCookieToHeaderConfig(CSRFCookieToHeaderConfig csrfCookieToHeaderConfig) {
+        notNull(csrfCookieToHeaderConfig, CSRFCookieToHeaderConfig.class);
+        return new RestAssuredMockMvcConfig(logConfig, encoderConfig, decoderConfig, sessionConfig,
+                objectMapperConfig, jsonConfig, xmlConfig, headerConfig, asyncConfig, multiPartConfig, mockMvcConfig, paramConfig, matcherConfig, csrfCookieToHeaderConfig);
     }
 
     /**
@@ -395,6 +411,11 @@ public class RestAssuredMockMvcConfig implements SpecificationConfig {
     }
 
     /**
+     * @return The Matcher Config
+     */
+    public CSRFCookieToHeaderConfig getCSRFCookieToHeaderConfig() { return csrfCookieToHeaderConfig; }
+
+    /**
      * @return A static way to create a new RestAssuredMockMvcConfiguration instance without calling "new" explicitly. Mainly for syntactic sugar.
      */
     public static RestAssuredMockMvcConfig newConfig() {
@@ -413,7 +434,7 @@ public class RestAssuredMockMvcConfig implements SpecificationConfig {
         return decoderConfig.isUserConfigured() || encoderConfig.isUserConfigured() || logConfig.isUserConfigured() || sessionConfig.isUserConfigured()
                 || objectMapperConfig.isUserConfigured() || xmlConfig.isUserConfigured() || jsonConfig.isUserConfigured() || headerConfig.isUserConfigured()
                 || asyncConfig.isUserConfigured() || multiPartConfig.isUserConfigured() || mockMvcConfig.isUserConfigured() || paramConfig.isUserConfigured()
-                || matcherConfig.isUserConfigured();
+                || matcherConfig.isUserConfigured() || csrfCookieToHeaderConfig.isUserConfigured();
     }
 
 }
